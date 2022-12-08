@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(Smart-Vehicle-)
+project(smart_vehicle)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,7 +8,7 @@ project(Smart-Vehicle-)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  navigation_msgs
+  nav_msgs
   roscpp
   rospy
   sensor_msgs
@@ -106,8 +106,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES Smart-Vehicle-
-#  CATKIN_DEPENDS navigation_msgs roscpp rospy sensor_msgs std_msgs
+#  LIBRARIES smart-vehicle-
+#  CATKIN_DEPENDS nav_msgs roscpp rospy sensor_msgs std_msgs
 #  DEPENDS system_lib
 )
 
