@@ -1,20 +1,37 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(Smart-Vehicle-)
+project(smart_vehicle)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
+set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  navigation_msgs
+  pcl_conversions
+  pcl_ros
   roscpp
   rospy
   sensor_msgs
   std_msgs
+  visualization_msgs
+  geometry_msgs
+  tf
+  cv_bridge
+  image_transport
+  std_msgs
+  sensor_msgs
+  geometry_msgs
+  nav_msgs
+  icp_localization
 )
 
+find_package(PCL REQUIRED QUIET)
+find_package(GTSAM REQUIRED QUIET)
+# find_package(EIGEN3 REQUIRED QUIET)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -105,6 +122,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy std_msgs
+  DEPENDS EIGEN3 PCL 
+  INCLUDE_DIRS include
 #  INCLUDE_DIRS include
 #  LIBRARIES Smart-Vehicle-
 #  CATKIN_DEPENDS navigation_msgs roscpp rospy sensor_msgs std_msgs
@@ -118,8 +138,12 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+ include
   ${catkin_INCLUDE_DIRS}
+	${PCL_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+  ${GTSAM_INCLUDE_DIR}
+  ${EIGEN3_INCLUDE_DIR}
 )
 
 ## Declare a C++ library
@@ -137,6 +161,18 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/localization-pkg_node.cpp)
 
+add_executable(scanOptimal 
+  src/poseOptimal.cpp
+  src/Scancontext.cpp
+)
+add_executable(odom_pub
+  src/odometry_publisher.cpp
+)
+target_link_libraries(scanOptimal
+  ${catkin_LIBRARIES} ${PCL_LIBRARIES} 
+  gtsam
+)
+target_link_libraries(odom_pub ${catkin_LIBRARIES})
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use

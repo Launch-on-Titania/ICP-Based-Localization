@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>Smart_Vehicle-</name>
+  <name>smart_vehicle</name>
   <version>0.0.0</version>
-  <description>The Smart_Vehicle- package</description>
+  <description>The smart_vehicle package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -64,6 +64,23 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+    <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>  
+  <build_depend>rosbag</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>image_transport</build_depend>
+  
+  <exec_depend>geometry_msgs</exec_depend>
+  
+ 
+  <exec_depend>rosbag</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>image_transport</exec_depend>
   
   <build_depend>viso2_ros</build_depend>
   <build_export_depend>viso2_ros</build_export_depend>
