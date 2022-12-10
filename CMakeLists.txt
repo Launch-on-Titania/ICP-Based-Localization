@@ -11,6 +11,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+
   pcl_conversions
   pcl_ros
   roscpp
@@ -126,8 +127,8 @@ catkin_package(
   DEPENDS EIGEN3 PCL 
   INCLUDE_DIRS include
 #  INCLUDE_DIRS include
-#  LIBRARIES Smart-Vehicle-
-#  CATKIN_DEPENDS navigation_msgs roscpp rospy sensor_msgs std_msgs
+#  LIBRARIES smart-vehicle-
+#  CATKIN_DEPENDS nav_msgs roscpp rospy sensor_msgs std_msgs
 #  DEPENDS system_lib
 )
 
