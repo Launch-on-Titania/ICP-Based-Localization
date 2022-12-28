@@ -3,24 +3,24 @@
     <arg name="robot_namespace" default="a112138"/>
     <arg name="pcd_filepath" default="$(find icp_localization)/data/urban.pcd" />
 
+    <node pkg="tf2_ros" type="static_transform_publisher" name="link_broadcaster" args="0 0 0 0 0 0 1 map odom">
+    </node>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_broadcaster" args="0 0 0 0 0 0 1 range_sensor velodyne">
+    </node>
+    <node name="$(arg robot_namespace)_sensor_pipe" pkg="smart_vehicle" type="sensor_pipe" args="$(arg robot_namespace)">
+    </node>
+
     <include file="$(find icp_localization)/launch/icp_node.launch">
-        <!-- input topic -->
-        <param name="icp_localization/range_data_topic" value="lidar"/>
-        <!-- output topic -->
-        <param name="icp_localization/odometry_data_topic" value="$(arg robot_namespace)/odom/lidar"/>
-        <param name="icp_localization/is_use_odometry" value="true"/>
+        <arg name="launch_rviz" value="false"/>
+        <arg name="pcd_filepath" value="$(arg pcd_filepath)"/>
+        <arg name="parameter_filepath" value="$(find smart_vehicle)/params/icp_param.yaml"/>
     </include>
     
-    <node name="$(arg robot_namespace)_viso2_ros" pkg="viso2_ros" type="mono_odometer">
-        <param name="pose" value="$(arg robot_namespace)/odom/mono_pose"/>
-        <!-- input topic -->
-        <param name="image" value="camera"/>
-        <!-- output topic -->
-        <param name="odometry" value="$(arg robot_namespace)/odom/mono_odom"/>
-        <param name="base_link_frame_id" value="base_link"/>
-        <param name="publish_tf" value="false"/>
-        <param name="sensor_frame_id" value="camera"/>
-    </node>
+    <include file="$(find smart_vehicle)/launch/euroc.launch">
+        <arg name="imu_topic" value="/simulated_imu"/>
+        <arg name="image_topic" value="image"/>
+        <arg name="output_topic" value="$(arg robot_namespace)/odom/mono_odom"/>
+    </include>
 
     <node name="$(arg robot_namespace)_robot_localization" pkg="robot_localization" type="ekf_localization_node" clear_params="true">
         <rosparam command="load" file="$(find robot_localization)/params/ekf_template.yaml" />
@@ -33,7 +33,7 @@
                                     true, true, true,
                                     false, false, false]</rosparam>
         
-        <param name="odom1" value="$(arg robot_namespace)/odom/rgbd_visual"/>
+        <param name="odom1" value="$(arg robot_namespace)/odom/mono_odom"/>
         <rosparam param="odom1_config">[false, false, false,
                                     true, true, true,
                                     true, true, true,
