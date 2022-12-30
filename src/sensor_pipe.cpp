@@ -24,7 +24,7 @@ public:
     ros::Publisher rtk_odom_publisher;
     nav_msgs::Odometry rtk_odom_buffer;
 
-    std::string fix_topic = "/rtk_utm";
+    std::string fix_topic = "/fix";
     ros::Subscriber fix_subscriber;
 
     std::string vel_topic = "/vel";
@@ -33,7 +33,7 @@ public:
 public:
     void init_params()
     {
-        this->imu_buffer.header.frame_id = "gps";
+        this->imu_buffer.header.frame_id = "inertial_sensor";
     }
     void init_publishers()
     {
