@@ -22,7 +22,8 @@
     <include file="$(find icp_localization)/launch/icp_node.launch">
         <arg name="launch_rviz" value="false"/>
         <arg name="pcd_filepath" value="$(arg pcd_filepath)"/>
-        <arg name="parameter_filepath" value="$(arg parameter_filepath)"/>
+        <arg name="parameter_filepath" value="$(find smart_vehicle)/params/icp_param.yaml"/>
+        <arg name="icp_config_path" value="$(find smart_vehicle)/params/icp_algo.yaml"/>
         <!-- <arg name="parameter_filepath" value="/mnt/d/leo/Downloads/forest/param_forest_example.yaml"/> -->
     </include>
     

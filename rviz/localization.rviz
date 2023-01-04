@@ -70,7 +70,7 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/PointCloud2
       Color: 255; 255; 255
-      Color Transformer: AxisColor
+      Color Transformer: Intensity
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
@@ -98,7 +98,7 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/PointCloud2
       Color: 255; 255; 255
-      Color Transformer: AxisColor
+      Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
@@ -146,11 +146,19 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        inertial_sensor:
+          Value: true
+        init_odom_source:
+          Value: true
         map:
           Value: true
         odom:
           Value: true
+        odom_source:
+          Value: true
         range_sensor:
+          Value: true
+        raw_odometry_source:
           Value: true
         velodyne:
           Value: true
@@ -162,8 +170,16 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
+          init_odom_source:
+            raw_odometry_source:
+              {}
           odom:
-            {}
+            odom_source:
+              range_sensor:
+                inertial_sensor:
+                  {}
+                velodyne:
+                  {}
       Update Interval: 0
       Value: true
     - Class: jsk_rviz_plugin/TFTrajectory

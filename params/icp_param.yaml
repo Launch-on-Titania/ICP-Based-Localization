@@ -17,17 +17,17 @@ icp_localization:
   min_num_odom_msgs_before_ready: 1
 
 calibration:
-  imu_to_range_sensor:
-    x: 0.0
-    y: 0.0
-    z: 0.0
+  imu_to_range_sensor: # After visualizing the camera extrinsic, it is too unbelievable.
+    x: 1.0615650379774844
+    y: 5.0668516025456267e-01
+    z: -1.3323682758802441e-01
     roll: 0.0
     pitch: 0.0
     yaw: 0.0
   odometry_source_to_range_sensor:
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 1.0615650379774844
+    y: 5.0668516025456267e-01
+    z: -1.3323682758802441e-01
     roll: 0.0
     pitch: 0.0
     yaw: 0.0 
