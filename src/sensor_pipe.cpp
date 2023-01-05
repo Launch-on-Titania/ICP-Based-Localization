@@ -8,6 +8,7 @@
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/Vector3.h>
 #include <nav_msgs/Odometry.h>
+#include "utm.hpp"
 
 class SensorPipe
 {
@@ -60,10 +61,18 @@ public:
 
     void fix_cb(const sensor_msgs::NavSatFix::ConstPtr &msg)
     {
+        double x, y;
         geometry_msgs::Vector3 position_buffer;
-        position_buffer.x = msg->longitude;
-        position_buffer.y = msg->latitude;
+        char UTM_zone = UTM::UTMLetterDesignator(msg->latitude);
+        UTM::LLtoUTM(
+            msg->latitude, msg->longitude,
+            x, y, // +x as direct north
+            &UTM_zone
+        );
+        position_buffer.x = x; 
+        position_buffer.y = y; 
         position_buffer.z = msg->altitude;
+        
 
         this->position_buffer = position_buffer;
         this->position_covariance.x = msg->position_covariance[0];

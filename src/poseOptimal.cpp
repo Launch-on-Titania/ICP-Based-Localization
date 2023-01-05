@@ -633,7 +633,7 @@ void process_pg()
       // }
       mBuf.unlock();
 
-      //local2global
+      //
       // Early reject by counting local delta movement (for equi-spereated kf drop)
       //
       odom_pose_prev = odom_pose_curr;
