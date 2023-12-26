@@ -1,4 +1,4 @@
-# Smart_Vehicle-
+# Smart Vehicle Project
 This the project folder that contains all our codes.
 
 ## Installation
